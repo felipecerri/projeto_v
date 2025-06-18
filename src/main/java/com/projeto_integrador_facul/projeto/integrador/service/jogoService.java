@@ -42,6 +42,12 @@ public class jogoService {
         
     }
     
+    public List<jogEntity> pesquisarJogoCategoria(String categoria){
+        
+        return jogoRepository.findByCategories(categoria);
+        
+    }
+    
     
     public jogEntity listarJogoId(Integer jogoId){
         

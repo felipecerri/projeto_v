@@ -57,6 +57,16 @@ public class jogoController {
         
     }
     
+    @GetMapping("/pesquisarCategoria/{categoria}")
+    
+    public ResponseEntity<List> getJogoByCategory(@PathVariable String categoria){
+        
+        List<jogEntity> listaJogo = jogoService.pesquisarJogoCategoria(categoria);
+        
+        return new ResponseEntity<>(listaJogo, HttpStatus.OK);
+        
+    }
+    
     @PostMapping("/adicionar")
     
     public ResponseEntity<jogEntity> addJogo(@RequestBody jogEntity jogo){

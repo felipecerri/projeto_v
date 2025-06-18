@@ -12,4 +12,6 @@ public interface jogoRepository extends JpaRepository<jogEntity, Integer>{
     @Query(value="select g from jogEntity g", nativeQuery=false)
     List<jogEntity> findall();
     
+    List<jogEntity> findByCategories(String categoria);
+    
 }
