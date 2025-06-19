@@ -14,6 +14,8 @@ public interface jogoRepository extends JpaRepository<jogEntity, Integer>{
     
     List<jogEntity> findByCategories(String categoria);
     
+    List<jogEntity> findByName(String name);
+    
     List<jogEntity> findByOrderByNameAsc();
     
     List<jogEntity> findByOrderByNameDesc();

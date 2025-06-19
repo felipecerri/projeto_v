@@ -87,6 +87,16 @@ public class jogoController {
         
     }
     
+    @GetMapping("/pesquisarNome/{nome}")
+    
+    public ResponseEntity<List> getJogoByName(@PathVariable String nome){
+        
+        List<jogEntity> listaJogo = jogoService.pesquisarJogoNome(nome);
+        
+        return new ResponseEntity<>(listaJogo, HttpStatus.OK);
+        
+    }
+    
     @PostMapping("/adicionar")
     
     public ResponseEntity<jogEntity> addJogo(@RequestBody jogEntity jogo){

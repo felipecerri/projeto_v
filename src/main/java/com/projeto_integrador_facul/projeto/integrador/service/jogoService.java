@@ -110,6 +110,12 @@ public class jogoService {
         
     }
     
+    public List<jogEntity> pesquisarJogoNome(String nome){
+        
+        return jogoRepository.findByName(nome);
+        
+    }
+    
     
     public jogEntity listarJogoId(Integer jogoId){
         
