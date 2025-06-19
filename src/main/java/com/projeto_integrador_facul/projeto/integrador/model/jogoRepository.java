@@ -14,4 +14,12 @@ public interface jogoRepository extends JpaRepository<jogEntity, Integer>{
     
     List<jogEntity> findByCategories(String categoria);
     
+    List<jogEntity> findByOrderByNameAsc();
+    
+    List<jogEntity> findByOrderByNameDesc();
+    
+    List<jogEntity> findByOrderByReleaseDateAsc();
+    
+    List<jogEntity> findByOrderByReleaseDateDesc();
+    
 }

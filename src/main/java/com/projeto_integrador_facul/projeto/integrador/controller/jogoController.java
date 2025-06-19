@@ -47,6 +47,26 @@ public class jogoController {
         
     }
     
+    @GetMapping("/listarPagina/{numeroPagina}/ordemAlfabetico/{ordem}")
+    
+    public ResponseEntity<List> getPaginaJogosOrdemAlfabetica(@PathVariable Integer numeroPagina, @PathVariable String ordem){
+        
+        List<jogEntity> jogos = jogoService.listarPaginaJogosOrdenadoNome(numeroPagina, ordem);
+        
+        return new ResponseEntity<>(jogos, HttpStatus.OK);
+        
+    }
+    
+    @GetMapping("/listarPagina/{numeroPagina}/ordemData/{ordem}")
+    
+    public ResponseEntity<List> getPaginaJogosOrdemData(@PathVariable Integer numeroPagina, @PathVariable String ordem){
+        
+        List<jogEntity> jogos = jogoService.listarPaginaJogosOrdenadoData(numeroPagina, ordem);
+        
+        return new ResponseEntity<>(jogos, HttpStatus.OK);
+        
+    }
+    
     @GetMapping("/pesquisar/{id}")
     
     public ResponseEntity<jogEntity> getJogoById(@PathVariable Integer id){

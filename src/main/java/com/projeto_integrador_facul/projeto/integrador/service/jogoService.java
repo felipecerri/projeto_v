@@ -42,6 +42,68 @@ public class jogoService {
         
     }
     
+    public List<jogEntity> listarPaginaJogosOrdenadoNome(int numeroPagina, String ordem){
+        
+        List<jogEntity> listaJogos = new ArrayList<>();
+        
+        if("Asc".equals(ordem)){
+            
+            listaJogos = jogoRepository.findByOrderByNameAsc();
+            
+        }else{
+            
+            listaJogos = jogoRepository.findByOrderByNameDesc();
+            
+        }
+        
+        int jogosPorPagina = 10-1;
+        
+        int indicePrimeiroJogo = jogosPorPagina * (numeroPagina-1);
+        int indiceUltimoJogo = jogosPorPagina * numeroPagina;
+        
+        List<jogEntity> listaJogo = jogoRepository.findAll();
+        
+        if(indiceUltimoJogo > listaJogo.size()){
+            
+            indiceUltimoJogo = listaJogo.size();
+            
+        }
+        
+        return listaJogo.subList(indicePrimeiroJogo, indiceUltimoJogo);
+        
+    }
+    
+    public List<jogEntity> listarPaginaJogosOrdenadoData(int numeroPagina, String ordem){
+        
+        List<jogEntity> listaJogos = new ArrayList<>();
+        
+        if("Asc".equals(ordem)){
+            
+            listaJogos = jogoRepository.findByOrderByReleaseDateAsc();
+            
+        }else{
+            
+            listaJogos = jogoRepository.findByOrderByReleaseDateDesc();
+            
+        }
+        
+        int jogosPorPagina = 10-1;
+        
+        int indicePrimeiroJogo = jogosPorPagina * (numeroPagina-1);
+        int indiceUltimoJogo = jogosPorPagina * numeroPagina;
+        
+        List<jogEntity> listaJogo = jogoRepository.findAll();
+        
+        if(indiceUltimoJogo > listaJogo.size()){
+            
+            indiceUltimoJogo = listaJogo.size();
+            
+        }
+        
+        return listaJogo.subList(indicePrimeiroJogo, indiceUltimoJogo);
+        
+    }
+    
     public List<jogEntity> pesquisarJogoCategoria(String categoria){
         
         return jogoRepository.findByCategories(categoria);
