@@ -44,15 +44,17 @@ public class jogoService {
     
     public List<jogEntity> listarPaginaJogosOrdenadoNome(int numeroPagina, String ordem){
         
-        List<jogEntity> listaJogos = new ArrayList<>();
+        List<jogEntity> listaJogo = new ArrayList<>();
         
-        if("Asc".equals(ordem)){
+        ordem = ordem.toUpperCase();
+        
+        if("ASC".equals(ordem)){
             
-            listaJogos = jogoRepository.findByOrderByNameAsc();
+            listaJogo = jogoRepository.findByOrderByNameAsc();
             
         }else{
             
-            listaJogos = jogoRepository.findByOrderByNameDesc();
+            listaJogo = jogoRepository.findByOrderByNameDesc();
             
         }
         
@@ -60,8 +62,6 @@ public class jogoService {
         
         int indicePrimeiroJogo = jogosPorPagina * (numeroPagina-1);
         int indiceUltimoJogo = jogosPorPagina * numeroPagina;
-        
-        List<jogEntity> listaJogo = jogoRepository.findAll();
         
         if(indiceUltimoJogo > listaJogo.size()){
             
@@ -75,15 +75,17 @@ public class jogoService {
     
     public List<jogEntity> listarPaginaJogosOrdenadoData(int numeroPagina, String ordem){
         
-        List<jogEntity> listaJogos = new ArrayList<>();
+        List<jogEntity> listaJogo = new ArrayList<>();
         
-        if("Asc".equals(ordem)){
+        ordem = ordem.toUpperCase();
+        
+        if("ASC".equals(ordem)){
             
-            listaJogos = jogoRepository.findByOrderByReleaseDateAsc();
+            listaJogo = jogoRepository.findByOrderByReleaseDateAsc();
             
         }else{
             
-            listaJogos = jogoRepository.findByOrderByReleaseDateDesc();
+            listaJogo = jogoRepository.findByOrderByReleaseDateDesc();
             
         }
         
@@ -91,8 +93,6 @@ public class jogoService {
         
         int indicePrimeiroJogo = jogosPorPagina * (numeroPagina-1);
         int indiceUltimoJogo = jogosPorPagina * numeroPagina;
-        
-        List<jogEntity> listaJogo = jogoRepository.findAll();
         
         if(indiceUltimoJogo > listaJogo.size()){
             
@@ -106,13 +106,13 @@ public class jogoService {
     
     public List<jogEntity> pesquisarJogoCategoria(String categoria){
         
-        return jogoRepository.findByCategories(categoria);
+        return jogoRepository.findByCategoriesContaining(categoria);
         
     }
     
     public List<jogEntity> pesquisarJogoNome(String nome){
         
-        return jogoRepository.findByName(nome);
+        return jogoRepository.findByNameContaining(nome);
         
     }
     
@@ -131,7 +131,7 @@ public class jogoService {
     
     public jogEntity criarJogo(jogEntity jogo){
         
-        jogo.setAppID(null);
+        jogo.setId_original(null);
         
         jogoRepository.save(jogo);
         
@@ -155,7 +155,7 @@ public class jogoService {
         
         jogEntity jogo = listarJogoId(jogoId);
         
-        jogoRepository.deleteById(jogo.getAppID());
+        jogoRepository.deleteById(jogo.getId_original());
         
     }
     
