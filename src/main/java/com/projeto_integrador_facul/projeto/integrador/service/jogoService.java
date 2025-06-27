@@ -5,25 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.projeto_integrador_facul.projeto.integrador.model.jogEntity;
 import com.projeto_integrador_facul.projeto.integrador.model.jogoRepository;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 
 @Service
+@Transactional
 public class jogoService {
     
     @Autowired
     
     jogoRepository jogoRepository;
     
+    
     public List<jogEntity> listarTodosJogos(){
         
         
-        return jogoRepository.findall();
+        return jogoRepository.findAll();
         
     }
     public List<jogEntity> listarPaginaJogos(int numeroPagina){
         
         
-        List<jogEntity> listaJogos = jogoRepository.findall();
+        List<jogEntity> listaJogos = jogoRepository.findAll();
         
         int jogosPorPagina = 10-1;
         
@@ -106,7 +109,7 @@ public class jogoService {
     
     public List<jogEntity> pesquisarJogoCategoria(String categoria){
         
-        return jogoRepository.findByCategoriesContaining(categoria);
+        return jogoRepository.findByGenresContaining(categoria);
         
     }
     
@@ -131,7 +134,7 @@ public class jogoService {
     
     public jogEntity criarJogo(jogEntity jogo){
         
-        jogo.setId_original(null);
+        jogo.setId(null);
         
         jogoRepository.save(jogo);
         
@@ -155,7 +158,7 @@ public class jogoService {
         
         jogEntity jogo = listarJogoId(jogoId);
         
-        jogoRepository.deleteById(jogo.getId_original());
+        jogoRepository.deleteById(jogo.getId());
         
     }
     

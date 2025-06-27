@@ -9,10 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface jogoRepository extends JpaRepository<jogEntity, Integer>{ 
     
-    @Query(value="select g from jogEntity g", nativeQuery=false)
-    List<jogEntity> findall();
-    
-    List<jogEntity> findByCategoriesContaining(String categoria);
+    List<jogEntity> findByGenresContaining(String categoria);
     
     List<jogEntity> findByNameContaining(String name);
     
