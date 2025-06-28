@@ -92,7 +92,7 @@ public class jogoService {
             
         }
         
-        int jogosPorPagina = 10-1;
+        int jogosPorPagina = 10;
         
         int indicePrimeiroJogo = jogosPorPagina * (numeroPagina-1);
         int indiceUltimoJogo = jogosPorPagina * numeroPagina;
@@ -105,6 +105,35 @@ public class jogoService {
         
         return listaJogo.subList(indicePrimeiroJogo, indiceUltimoJogo);
         
+    }
+    
+    public List<jogEntity> listarJogosComFiltro(int numeroPagina, String nomeJogo,String categoria, String plataforma, String direcaoOrdem){
+        
+        
+        List<jogEntity> listaJogo = new ArrayList<>();
+        
+        if(direcaoOrdem == null || "ASC".equals(direcaoOrdem.toUpperCase())){
+            
+            listaJogo = jogoRepository.findByFiltroAsc(categoria, plataforma, nomeJogo);
+            
+        }else{
+            
+            listaJogo = jogoRepository.findByFiltroDesc(categoria, plataforma, nomeJogo);
+            
+        }
+        
+        int jogosPorPagina = 25;
+        
+        int indicePrimeiroJogo = jogosPorPagina * (numeroPagina-1);
+        int indiceUltimoJogo = jogosPorPagina * numeroPagina;
+        
+        if(indiceUltimoJogo > listaJogo.size()){
+            
+            indiceUltimoJogo = listaJogo.size();
+            
+        }
+        
+        return listaJogo.subList(indicePrimeiroJogo, indiceUltimoJogo);
     }
     
     public List<jogEntity> pesquisarJogoCategoria(String categoria){

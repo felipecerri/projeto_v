@@ -15,6 +15,7 @@ import com.projeto_integrador_facul.projeto.integrador.model.jogEntity;
 import com.projeto_integrador_facul.projeto.integrador.service.jogoService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin
@@ -127,5 +128,13 @@ public class jogoController {
         
     }
     
+    @GetMapping("/filtrar")
+    
+    public ResponseEntity<List> getJogosComFiltros(@RequestParam int numeroPagina, @RequestParam(required = false) String nomeJogo, @RequestParam(required = false) String categoria, @RequestParam(required = false) String plataforma, @RequestParam(required = false) String direcaoOrdem){
+        
+        List<jogEntity> listaJogo = jogoService.listarJogosComFiltro(numeroPagina, nomeJogo, categoria, plataforma, direcaoOrdem);
+        
+        return new ResponseEntity<>(listaJogo, HttpStatus.OK);
+    }
 }
 
