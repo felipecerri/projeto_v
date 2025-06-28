@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin
 @RequestMapping("/jogo")
 
-
 public class jogoController {
     
     @Autowired
