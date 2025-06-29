@@ -32,7 +32,7 @@ public class jogEntity {
     private Integer positive;
     private Double price;
     
-    @Column(name = "releaseDate")
+    @Column(name = "release_date")
     private String releaseDate;
     
     private String screenshots;
