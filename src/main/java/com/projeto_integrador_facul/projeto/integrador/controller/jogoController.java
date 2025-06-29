@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.projeto_integrador_facul.projeto.integrador.model.jogEntity;
 import com.projeto_integrador_facul.projeto.integrador.service.jogoService;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,11 +131,26 @@ public class jogoController {
     
     @GetMapping("/filtrar")
     
-    public ResponseEntity<List> getJogosComFiltros(@RequestParam int numeroPagina, @RequestParam(required = false) String nomeJogo, @RequestParam(required = false) String categoria, @RequestParam(required = false) String plataforma, @RequestParam(required = false) String direcaoOrdem){
+    public ResponseEntity<Map<String, Object>> getJogosComFiltros(@RequestParam int numeroPagina, @RequestParam(required = false) String nomeJogo, @RequestParam(required = false) String categoria, @RequestParam(required = false) String plataforma, @RequestParam(required = false) String direcaoOrdem){
+        
+        if("".equals(categoria) || "All".equals(categoria)){
+            
+            categoria = null;
+            System.out.println(categoria);
+        }
+        if("".equals(plataforma) || "All".equals(plataforma)){
+            
+            plataforma = null;
+            
+        }
+        
+        System.out.println(categoria);
         
         List<jogEntity> listaJogo = jogoService.listarJogosComFiltro(numeroPagina, nomeJogo, categoria, plataforma, direcaoOrdem);
         
-        return new ResponseEntity<>(listaJogo, HttpStatus.OK);
+        Map<String, Object> response = new HashMap<>();
+        response.put("jogos", listaJogo);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
 

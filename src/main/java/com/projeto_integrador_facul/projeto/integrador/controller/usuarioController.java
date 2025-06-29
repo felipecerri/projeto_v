@@ -24,7 +24,7 @@ public class usuarioController {
     
     usuarioService usuarioService;
     
-    @GetMapping("/procurarUsuario/{usuario}/{senha}")
+    @PostMapping("/procurarUsuario/{usuario}/{senha}")
     
     public ResponseEntity<usuarioEntity> getUsuario(@PathVariable String usuario, @PathVariable String senha) throws UnsupportedEncodingException, NoSuchAlgorithmException{
         
