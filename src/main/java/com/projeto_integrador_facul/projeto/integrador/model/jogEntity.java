@@ -1,5 +1,6 @@
 package com.projeto_integrador_facul.projeto.integrador.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,10 @@ public class jogEntity {
     private Integer negative;
     private Integer positive;
     private Double price;
+    
+    @Column(name = "releaseDate")
     private String releaseDate;
+    
     private String screenshots;
     private String supported_languages;
     private String windows;
